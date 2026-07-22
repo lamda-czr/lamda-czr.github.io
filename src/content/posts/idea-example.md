@@ -5,7 +5,6 @@ description: 用于验证想法分类和轻量写作流程的草稿。
 tags: [研究想法, 反思]
 category: 想法
 draft: false
-image: /images/2.jpg
 ---
 
 ## 问题先于结论
@@ -20,5 +19,3 @@ $$
 def next_question(observation: str) -> str:
     return f"需要验证：{observation}"
 ```
-
-![示例图片路径](/images/2.jpg)

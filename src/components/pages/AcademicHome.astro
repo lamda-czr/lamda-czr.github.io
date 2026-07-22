@@ -12,16 +12,19 @@ const sections = [
 		name: "论文",
 		description: "论文阅读、推导笔记与研究中的阶段性问题。",
 		icon: "material-symbols:article",
+		image: "/images/1.jpg",
 	},
 	{
 		name: "想法",
 		description: "尚在形成中的观察、方法与学习反思。",
 		icon: "material-symbols:lightbulb",
+		image: "/images/2.jpg",
 	},
 	{
 		name: "学习资料",
 		description: "数学、统计、计算与经济学的学习整理。",
 		icon: "material-symbols:menu-book",
+		image: "/images/3.jpg",
 	},
 ];
 ---
@@ -57,14 +60,22 @@ const sections = [
 	<div class="home-sections" aria-label="内容板块">
 		{
 			sections.map((section) => (
-				<a class="home-section card-base" href={getCategoryUrl(section.name)}>
-					<Icon name={section.icon} aria-hidden="true" class="home-section-icon" />
-					<div>
-						<h2>{section.name}</h2>
+				                <a class="home-section card-base" href={getCategoryUrl(section.name)}>
+                    <img
+                        class="home-section-image"
+                        src={section.image}
+                        alt={`Cover image for ${section.name}`}
+                        loading="lazy"
+                    />
+                    <div class="home-section-content">
+                        <Icon name={section.icon} aria-hidden="true" class="home-section-icon" />
+                        <div>
+<h2>{section.name}</h2>
 						<p>{section.description}</p>
 						<span>{counts.get(section.name) ?? 0} 篇文章 · 查看全部</span>
-					</div>
-				</a>
+                        </div>
+                    </div>
+                </a>
 			))
 		}
 	</div>
@@ -175,11 +186,26 @@ const sections = [
 	}
 
 	.home-section {
-		display: flex;
-		gap: 0.85rem;
-		padding: 1.25rem;
+		display: block;
+		padding: 0;
 		border-color: transparent;
 		transition: border-color 180ms ease, box-shadow 180ms ease;
+	}
+
+	.home-section-image {
+		display: block;
+		width: 100%;
+		height: 9.5rem;
+		object-fit: cover;
+		transition: transform 260ms ease;
+	}
+
+	.home-section:hover .home-section-image { transform: scale(1.04); }
+
+	.home-section-content {
+		display: flex;
+		gap: 0.85rem;
+		padding: 1.1rem 1.25rem 1.2rem;
 	}
 
 	.home-section:hover {
