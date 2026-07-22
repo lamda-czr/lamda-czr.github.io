@@ -1,0 +1,229 @@
+---
+import { Icon } from "astro-icon/components";
+import { getCategoryList } from "@/utils/content-utils";
+import { getCategoryUrl } from "@/utils/url-utils";
+
+const categories = await getCategoryList();
+const counts = new Map(
+	categories.map((category) => [category.name, category.count]),
+);
+const sections = [
+	{
+		name: "论文",
+		description: "论文阅读、推导笔记与研究中的阶段性问题。",
+		icon: "material-symbols:article",
+	},
+	{
+		name: "想法",
+		description: "尚在形成中的观察、方法与学习反思。",
+		icon: "material-symbols:lightbulb",
+	},
+	{
+		name: "学习资料",
+		description: "数学、统计、计算与经济学的学习整理。",
+		icon: "material-symbols:menu-book",
+	},
+];
+---
+
+<section class="academic-home" aria-labelledby="home-title">
+	<div class="home-hero card-base">
+		<div
+			class="home-avatar"
+			role="img"
+			aria-label="陈子睿的头像；当前使用 /images/avatar.jpg"
+		></div>
+		<div class="home-intro">
+			<p class="home-kicker">Chen Zirui</p>
+			<h1 id="home-title">陈子睿</h1>
+			<p class="home-role">Mathematics and Economics Undergraduate at SUFE</p>
+			<p class="home-summary">
+				记录学习，整理思考，持续探索数学、统计、机器学习与经济学。
+			</p>
+			<div class="home-actions">
+				<a class="home-primary" href="#recent-posts">浏览文章</a>
+				<a
+					class="home-secondary"
+					href="https://github.com/lamda-czr"
+					target="_blank"
+					rel="noreferrer"
+				>
+					<Icon name="fa7-brands:github" aria-hidden="true" /> GitHub
+				</a>
+			</div>
+		</div>
+	</div>
+
+	<div class="home-sections" aria-label="内容板块">
+		{
+			sections.map((section) => (
+				<a class="home-section card-base" href={getCategoryUrl(section.name)}>
+					<Icon name={section.icon} aria-hidden="true" class="home-section-icon" />
+					<div>
+						<h2>{section.name}</h2>
+						<p>{section.description}</p>
+						<span>{counts.get(section.name) ?? 0} 篇文章 · 查看全部</span>
+					</div>
+				</a>
+			))
+		}
+	</div>
+
+	<div class="recent-heading" id="recent-posts">
+		<div>
+			<p class="home-kicker">Recent writing</p>
+			<h2>最近文章</h2>
+		</div>
+		<a href="/archive/">全部文章</a>
+	</div>
+</section>
+
+<style>
+	.academic-home {
+		margin-bottom: 1.5rem;
+	}
+
+	.home-hero {
+		display: flex;
+		align-items: center;
+		gap: 1.75rem;
+		padding: clamp(1.5rem, 4vw, 3rem);
+		margin-bottom: 1rem;
+	}
+
+	.home-avatar {
+		width: 7.5rem;
+		height: 7.5rem;
+		flex: 0 0 auto;
+		border: 1px solid color-mix(in oklch, var(--primary) 38%, transparent);
+		border-radius: 50%;
+		background-image: url("/images/avatar.jpg"), linear-gradient(135deg, oklch(0.82 0.04 225), oklch(0.62 0.08 225));
+		background-position: center;
+		background-size: cover;
+		box-shadow: 0 12px 28px color-mix(in srgb, var(--primary) 18%, transparent);
+	}
+
+	.home-intro h1,
+	.recent-heading h2,
+	.home-section h2 {
+		margin: 0;
+		color: rgb(15 23 42);
+	}
+
+	.home-intro h1 {
+		font-size: clamp(2rem, 5vw, 3rem);
+		font-weight: 650;
+		letter-spacing: 0.03em;
+	}
+
+	.home-kicker {
+		margin: 0 0 0.35rem;
+		color: var(--primary);
+		font-size: 0.8rem;
+		font-weight: 650;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+	}
+
+	.home-role {
+		margin: 0.4rem 0 0;
+		color: rgb(51 65 85);
+	}
+
+	.home-summary {
+		max-width: 42rem;
+		margin: 0.9rem 0 0;
+		color: rgb(51 65 85);
+		line-height: 1.8;
+	}
+
+	.home-actions {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.7rem;
+		margin-top: 1.35rem;
+	}
+
+	.home-actions a {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.4rem;
+		padding: 0.55rem 0.85rem;
+		border-radius: 0.55rem;
+		font-weight: 600;
+		transition: background-color 180ms ease, border-color 180ms ease;
+	}
+
+	.home-primary {
+		background: var(--primary);
+		color: white;
+	}
+
+	.home-primary:hover { background: color-mix(in oklch, var(--primary) 84%, black); }
+
+	.home-secondary {
+		border: 1px solid var(--line-divider);
+		color: rgb(51 65 85);
+	}
+
+	.home-secondary:hover { border-color: var(--primary); color: var(--primary); }
+
+	.home-sections {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 1rem;
+	}
+
+	.home-section {
+		display: flex;
+		gap: 0.85rem;
+		padding: 1.25rem;
+		border-color: transparent;
+		transition: border-color 180ms ease, box-shadow 180ms ease;
+	}
+
+	.home-section:hover {
+		border-color: color-mix(in oklch, var(--primary) 45%, var(--line-divider));
+		box-shadow: 0 10px 24px rgb(15 23 42 / 0.08);
+	}
+
+	.home-section-icon { flex: 0 0 auto; margin-top: 0.1rem; font-size: 1.45rem; color: var(--primary); }
+	.home-section p { margin: 0.55rem 0; color: rgb(51 65 85); font-size: 0.9rem; line-height: 1.65; }
+	.home-section span { color: var(--primary); font-size: 0.85rem; font-weight: 600; }
+
+	.recent-heading {
+		display: flex;
+		align-items: end;
+		justify-content: space-between;
+		margin: 2.25rem 0 1rem;
+	}
+
+	.recent-heading a { color: var(--primary); font-size: 0.9rem; font-weight: 600; }
+
+
+	:global(:root.dark) .home-intro h1,
+	:global(:root.dark) .recent-heading h2,
+	:global(:root.dark) .home-section h2 {
+		color: rgb(248 250 252);
+	}
+
+	:global(:root.dark) .home-role,
+	:global(:root.dark) .home-summary,
+	:global(:root.dark) .home-section p,
+	:global(:root.dark) .home-secondary {
+		color: rgb(226 232 240);
+	}
+
+	:global(:root.dark) .home-secondary {
+		border-color: rgb(226 232 240 / 0.28);
+	}
+	@media (max-width: 720px) {
+		.home-hero { align-items: flex-start; gap: 1rem; }
+		.home-avatar { width: 4.8rem; height: 4.8rem; }
+		.home-sections { grid-template-columns: 1fr; }
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.home-actions a, .home-section { transition: none; }
+	}
+</style>

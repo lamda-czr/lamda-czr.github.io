@@ -17,19 +17,15 @@ import type { CoverImageConfig } from "../types/coverImageConfig";
  */
 export const coverImageConfig: CoverImageConfig = {
 	// 是否在文章详情页显示封面图
-	enableInPost: true,
+	enableInPost: false,
 
 	randomCoverImage: {
 		// 随机封面图功能开关
 		enable: false,
 		// 封面图API列表
-		apis: [
-			"https://t.alcy.cc/pc",
-			"https://www.dmoe.cc/random.php",
-			"https://uapis.cn/api/v1/random/image?category=acg&type=pc",
-		],
+		apis: [],
 		// API失败时的回退图片路径（相对于src目录或以/开头的public目录路径）
-		fallback: "assets/images/cover.avif",
+		fallback: "/images/sitebackground.jpg",
 		// 是否显示加载动画
 		showLoading: false,
 	},

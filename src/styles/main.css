@@ -587,3 +587,32 @@ html {
   @apply text-sm text-(--text-secondary) text-center mb-2;
 }
 
+/* Personal-site full-screen wallpaper: image stays visible behind the entire document. */
+html[data-wallpaper-mode="overlay"],
+html[data-wallpaper-mode="overlay"] body {
+	min-height: 100%;
+	background: transparent !important;
+}
+
+html[data-wallpaper-mode="overlay"] #wallpaper-wrapper.wallpaper-overlay {
+	z-index: 0 !important;
+	opacity: 1 !important;
+	background: oklch(0.22 0.02 var(--hue));
+}
+
+html[data-wallpaper-mode="overlay"] #wallpaper-wrapper.wallpaper-overlay img {
+	filter: brightness(1.18) contrast(1.06) saturate(1.04) !important;
+	transform: scale(1.02) !important;
+}
+
+html[data-wallpaper-mode="overlay"] .card-base,
+html[data-wallpaper-mode="overlay"] #navbar > div {
+	background-color: rgb(255 255 255 / 0.9) !important;
+	backdrop-filter: blur(16px);
+}
+
+html.dark[data-wallpaper-mode="overlay"] .card-base,
+html.dark[data-wallpaper-mode="overlay"] #navbar > div {
+	background-color: rgb(15 23 42 / 0.9) !important;
+}
+
