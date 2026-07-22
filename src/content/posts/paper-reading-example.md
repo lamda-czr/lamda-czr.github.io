@@ -4,7 +4,7 @@ published: 2026-07-22
 description: 用于验证论文分类、公式、代码和文章目录的草稿。
 tags: [论文阅读, 概率]
 category: 论文
-draft: true
+draft: false
 image: /images/1.jpg
 ---
 

@@ -4,7 +4,7 @@ published: 2026-07-22
 description: 用于验证想法分类和轻量写作流程的草稿。
 tags: [研究想法, 反思]
 category: 想法
-draft: true
+draft: false
 image: /images/2.jpg
 ---
 

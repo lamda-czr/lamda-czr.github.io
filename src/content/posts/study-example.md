@@ -4,7 +4,7 @@ published: 2026-07-22
 description: 用于验证学习资料分类、中文标签和代码块的草稿。
 tags: [学习笔记, 机器学习]
 category: 学习资料
-draft: true
+draft: false
 image: /images/3.jpg
 ---
 
