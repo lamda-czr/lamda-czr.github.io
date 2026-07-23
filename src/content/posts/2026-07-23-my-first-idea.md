@@ -4,7 +4,7 @@ published: 2026-07-23
 description: 关于为什么开始记录，以及在 AI 时代重新练习表达、审视和输出。
 tags: [写作, 思考, AI]
 category: 想法
-draft: true
+draft: false
 ---
 
 ## 为什么从记录开始
